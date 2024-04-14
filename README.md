@@ -285,7 +285,7 @@ local FOV = 70
 local Speed = 15
 local JumpPower = 25
 
-local Toggle = Tab:Toggle("Entity Notifier",false,function(Value)
+local Toggle = Tab:Toggle("Entity Notifier",function(Value)
 		if Value then
 			EntityNotifier = workspace.ChildAdded:Connect(function(child)
 				task.wait(1)
@@ -297,12 +297,14 @@ local Toggle = Tab:Toggle("Entity Notifier",false,function(Value)
 elseif child.Name == "FigureLibrary" then
 if EntityEsp then
 						selection(child, "Figure")
-					end
+   end
+end
 elseif child.Name == "FigureRagdoll" then
 if EntityEsp then
 						selection(child, "Figure")
-					end
-                                elseif child.Name == "SeekMoving" then
+   end
+end
+elseif child.Name == "SeekMoving" then
 					notify("Seek")
 					if EntityEsp then
 						selection(child, "Seek")
@@ -358,11 +360,11 @@ if EntityEsp then
 		end
 	end
 )
-local Toggle = Tab:Toggle("Auto Pick",false,function(Value)
+local Toggle = Tab:Toggle("Auto Pick",function(Value)
 		AutoInteract = Value
 	end
 )
-local Toggle = Tab:Toggle("Noclip",false,function(Value)
+local Toggle = Tab:Toggle("Noclip",function(Value)
 		if Value then
 			Clip = false
 			task.wait(0.1)
@@ -384,7 +386,7 @@ local Toggle = Tab:Toggle("Noclip",false,function(Value)
 		end
 	end
 )
-local Toggle = Tab:Toggle("FullBright",false,function(Value)
+local Toggle = Tab:Toggle("FullBright",function(Value)
 		if Value then
 				game:GetService("Lighting").Brightness = 2
 				game:GetService("Lighting").ClockTime = 14
@@ -401,7 +403,7 @@ local Toggle = Tab:Toggle("FullBright",false,function(Value)
 	end
 )
 game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.MSHNL then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Chandelier") then game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets").Chandelier:Destroy();end end end);end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.MSHNL then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Light_Fixtures") then game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets").Light_Fixtures:Destroy();end end end);end)
-Tab:Toggle("No Light",false,function(NL)
+Tab:Toggle("No Light",function(NL)
 _G.MSHNL = NL
 end
 )
@@ -510,7 +512,7 @@ local Toggle = Tab:Toggle("Fly [PC Only],false,function(Value)
 	end
 )
 
-local Button = Tab:Toggle("GodMode",false,function(GM)
+local Button = Tab:Toggle("GodMode",function(GM)
  if GM then
  local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
 Collison.Position = Collison.Position - Vector3.new(0,7.5,0)
@@ -553,7 +555,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Speed
 	game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
 end)
-local Toggle = Tab3:Toggle("Bypass Retro Screech",false,function(Value)
+local Toggle = Tab3:Toggle("Bypass Retro Screech",function(Value)
 		if Value then
 			game:GetService("ReplicatedStorage").Entities.ScreechRetro.Name = "Screechretro"
 		else
@@ -561,7 +563,8 @@ local Toggle = Tab3:Toggle("Bypass Retro Screech",false,function(Value)
 		end
 	end
  )
-local Toggle = Tab3:Toggle("Bypass Screech",false,function(Value)
+local Toggle = Tab3:Toggle("Bypass Screech",
+,function(Value)
 		if Value then
 			game:GetService("ReplicatedStorage").Entities.Screech:Destroy()
                         else
@@ -570,7 +573,7 @@ local Toggle = Tab3:Toggle("Bypass Screech",false,function(Value)
 	end
  )
 local Toggle = Tab3:Toggle("Bypass
-Lava",false,function(Value)
+Lava",function(Value)
 		if Value then
 			for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
 				if child then
@@ -606,7 +609,7 @@ Lava",false,function(Value)
 	end
 )
 
-local Toggle = Tab3:Toggle("Bypass Eyes",false,function(Value)
+local Toggle = Tab3:Toggle("Bypass Eyes",function(Value)
 		if Value then
 			Eyes = game:GetService("RunService").RenderStepped:Connect(function()
 				game:GetService("ReplicatedStorage").RemotesFolder.MotorReplication:FireServer(0, 90, 0, false)
@@ -616,7 +619,7 @@ local Toggle = Tab3:Toggle("Bypass Eyes",false,function(Value)
 		end
 	end
 )
-local Toggle = Tab3:Toggle("Bypass SeekWall",false,function(Value)
+local Toggle = Tab3:Toggle("Bypass SeekWall",function(Value)
 		if Value then
 			for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
 				if child.Parts:FindFirstChild("ScaryWall") then
@@ -635,7 +638,7 @@ local Toggle = Tab3:Toggle("Bypass SeekWall",false,function(Value)
 	end
 )
 
-local Toggle = Tab3:Toggle("Bypass DrakeBloxxers",false,function(Value)
+local Toggle = Tab3:Toggle("Bypass DrakeBloxxers",function(Value)
 		if Value then
 			DrakoBloxxers = workspace.ChildAdded:Connect(function(child)
 				task.wait(1)
@@ -653,17 +656,17 @@ local Toggle = Tab3:Toggle("Bypass DrakeBloxxers",false,function(Value)
 		end
 	end
 )
-game:GetService("Workspace").DescendantAdded:Connect(function(v186)if  not _G.antibanananana then return;end if v186.IsA(v186,"Part") then if _G.antibanananana then if (v186.Name=="BananaPeel") then v186.CanTouch=false;end end end end);local Toggle = Tab3:Toggle("Bypass Banana",false,function(v187)local v188=0;while true do if (v188==(0 + 0)) then _G.antibanananana=v187;if (_G.antibanananana==true) then for v600,v601 in pairs(game:GetService("Workspace"):GetDescendants()) do if v601:IsA("Part") then if (v601.Name=="BananaPeel") then v601.CanTouch=false;end end end end break;end end end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.antije then for v413,v414 in pairs(game.workspace:GetChildren()) do if (v414.Name=="JeffTheKiller") then v414.Knife.CanTouch=false;end end for v415,v416 in pairs(game.workspace:GetChildren()) do if (v416.Name=="JeffTheKiller") then v416.Head.CanTouch=false;end end for v417,v418 in pairs(game.workspace:GetChildren()) do if (v418.Name=="JeffTheKiller") then v418.HumanoidRootPart.CanTouch=false;end end for v419,v420 in pairs(game.workspace:GetChildren()) do if (v420.Name=="JeffTheKiller") then v420["Left Arm"].CanTouch=false;end end for v421,v422 in pairs(game.workspace:GetChildren()) do if (v422.Name=="JeffTheKiller") then v422["Left Leg"].CanTouch=false;end end for v423,v424 in pairs(game.workspace:GetChildren()) do if (v424.Name=="JeffTheKiller") then v424["Right Arm"].CanTouch=false;end end for v425,v426 in pairs(game.workspace:GetChildren()) do if (v426.Name=="JeffTheKiller") then v426["Right Leg"].CanTouch=false;end end for v427,v428 in pairs(game.workspace:GetChildren()) do if (v428.Name=="JeffTheKiller") then v428.Torso.CanTouch=false;end end end end);end);local Toggle = Tab3:Toggle("Bypass Jeff",false,function(v189)_G.antije=v189;end);
-local Toggle = Tab3:Toggle("Bypass Seek Trigger",false,function(v119)v16.noseek=v119;if v119 then local v279;v279=workspace.CurrentRooms.ChildAdded:Connect(function(v333)local v334=0 -0 ;local v335;while true do if (v334==(0 + 0)) then v335=v333:WaitForChild("TriggerEventCollision",2);if v335 then v335:Destroy();end break;end end end);repeat task.wait();until  not v16.noseek v279:Disconnect();end end);
-local Toggle = Tab3:Toggle("Bypass Halt",false,function(v123)local v123=0;while true do if (v123==(1480 -(641 + 839))) then _G.BypassHalte=v122;if (_G.BypassHalte==true) then local v472=913 -(910 + 3) ;local v473;while true do if (v472==(0 -0)) then v473=game:GetService("ReplicatedStorage").ClientModules.EntityModules.Shade;v473.Parent=game.Workspace;break;end end elseif (_G.BypassHalte==false) then local v642=1684 -(1466 + 218) ;local v643;while true do if (v642==(0 + 0)) then v643=game.Workspace.Shade;v643.Parent=game:GetService("ReplicatedStorage").ClientModules.EntityModules;break;end end end break;end end end);
-local Toggle = Tab3:Toggle("Bypass Dupe",false,function(v128)v16.nodupe=v128;if v128 then local v288;v288=game:GetService("ReplicatedStorage").GameData.LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()task.wait();for v397,v398 in pairs(game:GetService("Workspace").CurrentRooms:GetDescendants()) do if (v398.Name=="DoorFake") then v398.Hidden.CanTouch=false;end end repeat task.wait();until  not v16.nodupe v288:Disconnect();end);end end);
-local v48=game.ReplicatedStorage:WaitForChild("EntityInfo"):WaitForChild("A90");local Toggle = Tab3:Toggle("Bypass A90",false,function(v130)v16.noa90=v130;if v130 then local v289=0 + 0 ;local v290;while true do if (v289==(1477 -(29 + 1448))) then v290=v12.PlayerGui:WaitForChild("MainUI"):WaitForChild("Jumpscare"):FindFirstChild("Jumpscare_A90");if v290 then v290.Parent=nil;v48.Parent=nil;repeat task.wait();game.SoundService.Main.Volume=1390 -(135 + 1254) ;until  not v16.noa90 v290.Parent=v12.PlayerGui.MainUI.Jumpscare;v48.Parent=v15;end break;end end end end);
-game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.bypassSnare then for v399,v400 in pairs(game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):GetChildren()) do if (v400.Name=="Snare") then v400.Hitbox['TouchInterest']:Destroy();end end end end);end);local Toggle = Tab3:Toggle("Bypass Retro Screech",false,function(v132)_G.bypassSnare=v132;end);
+game:GetService("Workspace").DescendantAdded:Connect(function(v186)if  not _G.antibanananana then return;end if v186.IsA(v186,"Part") then if _G.antibanananana then if (v186.Name=="BananaPeel") then v186.CanTouch=false;end end end end);local Toggle = Tab3:Toggle("Bypass Banana",function(v187)local v188=0;while true do if (v188==(0 + 0)) then _G.antibanananana=v187;if (_G.antibanananana==true) then for v600,v601 in pairs(game:GetService("Workspace"):GetDescendants()) do if v601:IsA("Part") then if (v601.Name=="BananaPeel") then v601.CanTouch=false;end end end end break;end end end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.antije then for v413,v414 in pairs(game.workspace:GetChildren()) do if (v414.Name=="JeffTheKiller") then v414.Knife.CanTouch=false;end end for v415,v416 in pairs(game.workspace:GetChildren()) do if (v416.Name=="JeffTheKiller") then v416.Head.CanTouch=false;end end for v417,v418 in pairs(game.workspace:GetChildren()) do if (v418.Name=="JeffTheKiller") then v418.HumanoidRootPart.CanTouch=false;end end for v419,v420 in pairs(game.workspace:GetChildren()) do if (v420.Name=="JeffTheKiller") then v420["Left Arm"].CanTouch=false;end end for v421,v422 in pairs(game.workspace:GetChildren()) do if (v422.Name=="JeffTheKiller") then v422["Left Leg"].CanTouch=false;end end for v423,v424 in pairs(game.workspace:GetChildren()) do if (v424.Name=="JeffTheKiller") then v424["Right Arm"].CanTouch=false;end end for v425,v426 in pairs(game.workspace:GetChildren()) do if (v426.Name=="JeffTheKiller") then v426["Right Leg"].CanTouch=false;end end for v427,v428 in pairs(game.workspace:GetChildren()) do if (v428.Name=="JeffTheKiller") then v428.Torso.CanTouch=false;end end end end);end);local Toggle = Tab3:Toggle("Bypass Jeff",function(v189)_G.antije=v189;end);
+local Toggle = Tab3:Toggle("Bypass Seek Trigger",function(v119)v16.noseek=v119;if v119 then local v279;v279=workspace.CurrentRooms.ChildAdded:Connect(function(v333)local v334=0 -0 ;local v335;while true do if (v334==(0 + 0)) then v335=v333:WaitForChild("TriggerEventCollision",2);if v335 then v335:Destroy();end break;end end end);repeat task.wait();until  not v16.noseek v279:Disconnect();end end);
+local Toggle = Tab3:Toggle("Bypass Halt",function(v123)local v123=0;while true do if (v123==(1480 -(641 + 839))) then _G.BypassHalte=v122;if (_G.BypassHalte==true) then local v472=913 -(910 + 3) ;local v473;while true do if (v472==(0 -0)) then v473=game:GetService("ReplicatedStorage").ClientModules.EntityModules.Shade;v473.Parent=game.Workspace;break;end end elseif (_G.BypassHalte==false) then local v642=1684 -(1466 + 218) ;local v643;while true do if (v642==(0 + 0)) then v643=game.Workspace.Shade;v643.Parent=game:GetService("ReplicatedStorage").ClientModules.EntityModules;break;end end end break;end end end);
+local Toggle = Tab3:Toggle("Bypass Dupe",function(v128)v16.nodupe=v128;if v128 then local v288;v288=game:GetService("ReplicatedStorage").GameData.LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()task.wait();for v397,v398 in pairs(game:GetService("Workspace").CurrentRooms:GetDescendants()) do if (v398.Name=="DoorFake") then v398.Hidden.CanTouch=false;end end repeat task.wait();until  not v16.nodupe v288:Disconnect();end);end end);
+local v48=game.ReplicatedStorage:WaitForChild("EntityInfo"):WaitForChild("A90");local Toggle = Tab3:Toggle("Bypass A90",function(v130)v16.noa90=v130;if v130 then local v289=0 + 0 ;local v290;while true do if (v289==(1477 -(29 + 1448))) then v290=v12.PlayerGui:WaitForChild("MainUI"):WaitForChild("Jumpscare"):FindFirstChild("Jumpscare_A90");if v290 then v290.Parent=nil;v48.Parent=nil;repeat task.wait();game.SoundService.Main.Volume=1390 -(135 + 1254) ;until  not v16.noa90 v290.Parent=v12.PlayerGui.MainUI.Jumpscare;v48.Parent=v15;end break;end end end end);
+game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.bypassSnare then for v399,v400 in pairs(game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):GetChildren()) do if (v400.Name=="Snare") then v400.Hitbox['TouchInterest']:Destroy();end end end end);end);local Toggle = Tab3:Toggle("Bypass Snare",function(v132)_G.bypassSnare=v132;end);
 game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.SeekESe then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Seek_Arm") then for v528,v529 in pairs(game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):GetChildren()) do if (v529.Name=="Seek_Arm") then v529.AnimatorPart.CanTouch=false;end end end end end);end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.SeekES then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("ChandelierObstruction") then for v530,v531 in pairs(game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):GetChildren()) do if (v531.Name=="ChandelierObstruction") then v531.HurtPart.CanTouch=false;end end end end end);end);
-local Toggle = Tab3:Toggle("Bypass Arm",false,function(v111)_G.SeekESe=v111;end);
-local Toggle = Tab3:Toggle("Bypass Chandelier",false,function(v112)_G.SeekES=v112;end);
+local Toggle = Tab3:Toggle("Bypass Arm",function(v111)_G.SeekESe=v111;end);
+local Toggle = Tab3:Toggle("Bypass Chandelier",function(v112)_G.SeekES=v112;end);
 
-local Toggle = Tab2:Toggle("Key ESP",false,function(Value)
+local Toggle = Tab2:Toggle("Key ESP",function(Value)
 		if Value then
 			for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
 				if v.Name == "KeyObtain" and v:IsA("Model") then
@@ -703,9 +706,8 @@ local Toggle = Tab2:Toggle("Key ESP",false,function(Value)
 	end
  )
 
-local Toggle = Tab2:Toggle("Door ESP",false,function(Value)
-		if Value then
-			for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
+local Toggle = Tab2:Toggle("Door ESP",function(Value)
+	(workspace.CurrentRooms:GetDescendants()) do
 				if v.Name == "Door" and v:IsA("Model") then
 					selection(v, "Door", true)
 					spawn(function()
@@ -743,7 +745,7 @@ local Toggle = Tab2:Toggle("Door ESP",false,function(Value)
 	end
  )
 
-local Toggle = Tab2:Toggle("Closet ESP",false,function(Value)
+local Toggle = Tab2:Toggle("Closet ESP",function(Value)
 		if Value then
 			for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
 				if v.Name == "Wardrobe" and v:IsA("Model") then
@@ -769,7 +771,7 @@ local Toggle = Tab2:Toggle("Closet ESP",false,function(Value)
 	end
 )
 
-local Toggle = Tab2:Toggle("Entities ESP",false,function(Value)
+local Toggle = Tab2:Toggle("Entities ESP",function(Value)
 		EntityEsp = Value
 	end
 )
