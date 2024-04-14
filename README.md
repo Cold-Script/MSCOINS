@@ -746,14 +746,14 @@ local Toggle = Tab2:Toggle("Door ESP",false,function(Value)
 local Toggle = Tab2:Toggle("Closet ESP",false,function(Value)
 		if Value then
 			for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
-				if v.Name == "RetroWardrobe" or "Wardrobe" or "RetroWardrobe" or "Rooms_Locker" "Fridge_Locker" and v:IsA("Model") then
+				if v.Name == "Wardrobe" and v:IsA("Model") then
 					selection(v, "Closet", false, true)
 				end
 			end
 			ClosetESP = workspace.CurrentRooms.ChildAdded:Connect(function(child)
 				task.wait(1)
 				for _, v in pairs(child:GetDescendants()) do
-					if v.Name == "RetroWardrobe" or "Wardrobe" or "RetroWardrobe" or "Rooms_Locker" "Fridge_Locker" and v:IsA("Model") then
+					if v.Name == "Wardrobe" and v:IsA("Model") then
 						selection(v, "Closet", false, true)
 					end
 				end
