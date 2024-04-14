@@ -260,14 +260,14 @@ local repo = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/'
 local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
-
-local Window = Library:CreateWindow({
-    Title = "MSCOINS-(v1.2.1)",
-    Center = true,
-    AutoShow = true,
-    TabPadding = 5.5,
-    MenuFadeTime = 0
-})
+-->> Loader
+repeat wait() until game:IsLoaded()
+-->> Library Variables
+local Library2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+local Window = Library2:Window("MSCOIND", "v1.2.6", "A")
+local Tab = Window:Tab("Main")
+local Tab2 = Window:Tab("ESP")
+local Tab3 = Window:Tab("Bypass")
 local v16={espdoors=false,espkeys=false,espitems=false,espbooks=false,esprush=false,espchest=false,esplocker=false,esphumans=false,espgold=false,goldespvalue=1061 -(810 + 251) ,hintrush=false,hintrushhee=false,light=false,instapp=false,noseek=false,nogates=false,nopuzzle=false,noa90=false,noskeledoors=false,noseekarmsfire=false,noscreech=false,nodupe=false,getcode=false,getcodet=false,roomsnolock=false,draweraura=false,autorooms=false,itemsaura=false,autopulllever=false,bookcollecter=false,breakercollecter=false};local v17={table.unpack(v16)};local v18={doors={},keys={},items={},books={},entity={},chests={},lockers={},people={},gold={}}
 local killBricks
 local Eyes
@@ -289,14 +289,8 @@ local EntityEsp = false
 local FOV = 70
 local Speed = 15
 local JumpPower = 25
-local Tab = Window:AddTab("Main")
-local Section = Tab:AddLeftGroupbox("Toggles")
 
-local Toggle = Section:AddToggle("Notifies",{
-	Text = "Entity Notifier",
-	Default = false,
-	Tooltip = "EntityNotifier",
-	Callback = function(Value)
+local Toggle = Tab:Toggle("Entity Notifier",false,function(Value)
 		if Value then
 			EntityNotifier = workspace.ChildAdded:Connect(function(child)
 				task.wait(1)
@@ -367,21 +361,13 @@ local Toggle = Section:AddToggle("Notifies",{
 			EntityNotifier:Disconnect()
                         EntityNotifierRetroScreech:Disconnect()
 		end
-	end,
-})
-local Toggle = Section:AddToggle("Interact",{
-	Text = "Auto Interact",
-	Default = false,
-	Tooltip = "Auto Interact",
-	Callback = function(Value)
+	end
+)
+local Toggle = Tab:Toggle("Auto Pick",false,function(Value)
 		AutoInteract = Value
 	end,
-})
-local Toggle = Section:AddToggle("No",{
-	Text = "Noclip",
-	Default = false,
-	Tooltip = "Noclip",
-	Callback = function(Value)
+)
+local Toggle = Tab:Toggle("Noclip",false,function(Value)
 		if Value then
 			Clip = false
 			task.wait(0.1)
@@ -401,12 +387,9 @@ local Toggle = Section:AddToggle("No",{
 			end
 			Clip = true
 		end
-	end,
-})
-local Toggle = Section:AddToggle("FB",{
-	Text = "FullBright",
-	Default = false,
-	Tooltip = "FullBright",
+	end
+)
+local Toggle = Tab:Toggle("FullBright",false,
 	Callback = function(Value)
 		if Value then
 				game:GetService("Lighting").Brightness = 2
@@ -421,17 +404,13 @@ local Toggle = Section:AddToggle("FB",{
 				game:GetService("Lighting").GlobalShadows = true
 				game:GetService("Lighting").OutdoorAmbient = Color3.fromRGB(256,256,256)
               end
-	end,
-})
+	end
+)
 game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.MSHNL then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Chandelier") then game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets").Chandelier:Destroy();end end end);end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.MSHNL then if game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets"):FindFirstChild("Light_Fixtures") then game.workspace.CurrentRooms[tostring(game:GetService("ReplicatedStorage").GameData.LatestRoom.Value)]:WaitForChild("Assets").Light_Fixtures:Destroy();end end end);end)
-Section:AddToggle("Nlight",{
-Text = "No Light",
-Default = false,
-Tooltip = "No Light",
-Callback = function(NL)
+Tab:Toggle("No Light",false,function(NL)
 _G.MSHNL = NL
 end
-})
+)
 function sFLY(vfly)
 	repeat task.wait() until game:GetService("Players").LocalPlayer and game:GetService("Players").LocalPlayer.Character and game:GetService("Players").LocalPlayer.Character.HumanoidRootPart and game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
 	repeat task.wait() until game:GetService("Players").LocalPlayer:GetMouse()
@@ -526,11 +505,7 @@ function NOFLY()
 	pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
 end
 
-local Toggle = Section:AddToggle("Fly",{
-	Text = "Fly [PC Only]",
-	Default = false,
-	Toopltip = "Fly [PC only]",
-	Callback = function(Value)
+local Toggle = Tab:Toggle("Fly [PC Only],false,function(Value)
 		if Value then
 			NOFLY()
 			task.wait()
@@ -538,14 +513,10 @@ local Toggle = Section:AddToggle("Fly",{
 		else
 			NOFLY()
 		end
-	end,
-})
+	end
+)
 
-local Button = Section:AddToggle("Gm",{
-	Text = "GodMode",
-        Default = false,
-	Tooltip = "Anti Ambush/Rush Died",
-	Callback = function(GM)
+local Button = Tab:Toggle("GodMode",false,function(GM)
  if GM then
  local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
 Collison.Position = Collison.Position - Vector3.new(0,7.5,0)
@@ -553,113 +524,59 @@ else
 local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
 Collison.Position = Collison.Position - Vector3.new(0,-7.5,0)
    end
-end
-})
-local Button = Section:AddButton({
-	Text = "Delete Messages",
-	Func = function()
+end)
+local Button = Tan:Button("Delete Messages",function()
 		for _, v in pairs(workspace:GetChildren()) do
 			if v:IsA("Message") then
 				v:Destroy()
 			end
 		end
-	end,
-})
-Section:AddButton({
-Text="Walk Fly Ui Toggle [Mobile Only]",
-Tooltip="You is Pc? No on ok Bro",
-Func=function()loadstring(game:HttpGet("https://raw.githubusercontent.com/LuckyEvaletion/Scripts-1/main/Mobile.Fly"))()
+	end
+)
+Tab:Button("Walk Ui Toggle [Mobile Only]",function()loadstring(game:HttpGet("https://raw.githubusercontent.com/LuckyEvaletion/Scripts-1/main/Mobile.Fly"))()
 end
-})
-local Section = Tab:AddRightGroupbox("Sliders")
-
-local Slider = Section:AddSlider("MySlider",{
-	Text = "Walk Speed",
-	Min = 16,
-	Max = 21,
-	Default = 16,
-	Tooltip = "WalkSpeed",
-	Rounding=0,
-	Compact=true,
-	Callback = function(Value)
+)
+local Slider = Tab:Slider("Walk Speed",16,21,21,function(Value)
 		Speed = Value
-	end,
-})
-local Slider = Section:AddSlider("MySlider",{
-	Text = "Fly Speed",
-	Min = 0.1,
-	Max = 0.4,
-	Default = 0.1,
-	Tooltip = "FlySpeed",
-	Rounding=1,
-	Compact=true,
-	Callback = function(Value)
+	end
+)
+local Slider = Tab:Slider("Fly Speed",0,0.4,0.4,function(Value)
 		FlySpeed = Value
-	end,
-})
+	end
+)
 
-local Slider = Section:AddSlider("MySlider",{
-	Text = "JumpPower",
-	Min = 25,
-	Max = 50,
-	Default = 25,
-	Tooltip = "JumpPower",
-	Rounding=0,
-        Compact=true,
-	Callback = function(Value)
+local Slider = Tab:Slider("JumpPower",25,50,50,function(Value)
 		JumpPower = Value
-	end,
-})
+	end
+)
 
-
-local Slider = Section:AddSlider("MySlider",{
-	Text = "Field Of View",
-	Min = 70,
-	Max = 120,
-	Default = 70,
-	Flag = "FOV",
-	Rounding=0,
-        Compact=true,
-	Callback = function(Value)
-		FOV = Value
-	end,
-})
+local Slider = Tab:Slider("Fov",30,120,120,function(Value)
+		Speed = Value
+	end
+)
 game:GetService("RunService").RenderStepped:Connect(function()
 	workspace.CurrentCamera.FieldOfView = FOV
 	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Speed
 	game.Players.LocalPlayer.Character.Humanoid.JumpPower = JumpPower
 end)
-local Tab2 = Window:AddTab("Bypass")
-local Section = Tab2:AddLeftGroupbox("Bypass Mode")
-local Toggle = Section:AddToggle("Nos",{
-	Text = "Bypass Retro Screech",
-	Default = false,
-	Tooltip = "BypassScreech",
-	Callback = function(Value)
+local Toggle = Tab3:Toggle("Bypass Retro Screech",false,function(Value)
 		if Value then
 			game:GetService("ReplicatedStorage").Entities.ScreechRetro.Name = "Screechretro"
 		else
 			game:GetService("ReplicatedStorage").Entities.Screechretro.Name = "ScreechRetro"
 		end
-	end,
-})
-local Toggle = Section:AddToggle("Nos",{
-	Text = "Bypass Screech",
-	Default = false,
-	Tooltip = "BypassScreech",
-	Callback = function(Value)
+	end
+ )
+local Toggle = Tab3:Toggle("Bypass Screech",false,function(Value)
 		if Value then
 			game:GetService("ReplicatedStorage").Entities.Screech:Destroy()
                         else
                         game:GetService("Workspace").Entities.Screech:Destroy()
 		end
-	end,
-})
-local Toggle = Section:AddToggle("BK",{
-	Text = "Bypass Lava",
-	Default = false,
-	Tooltip = "BypassKillbricks",
-	Callback = function(Value)
+	end
+ )
+local Toggle = Tab3:Toggle("Bypass
+Lava",false,function(Value)
 		if Value then
 			for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
 				if child then
@@ -692,14 +609,10 @@ local Toggle = Section:AddToggle("BK",{
 				end
 			end
 		end
-	end,
-})
+	end
+)
 
-local Toggle = Section:AddToggle("Beyes",{
-	Text = "Bypass Eyes",
-	Default = false,
-	Tooltip = "BypassEyes",
-	Callback = function(Value)
+local Toggle = Tab3:Toggle("Bypass Eyes",false,function(Value)
 		if Value then
 			Eyes = game:GetService("RunService").RenderStepped:Connect(function()
 				game:GetService("ReplicatedStorage").RemotesFolder.MotorReplication:FireServer(0, 90, 0, false)
@@ -708,12 +621,8 @@ local Toggle = Section:AddToggle("Beyes",{
 			Eyes:Disconnect()
 		end
 	end,
-})
-local Toggle = Section:AddToggle("BS",{
-	Text = "Bypass SeekWall",
-	Default = false,
-	Tooltip = "BypassSeek",
-	Callback = function(Value)
+)
+local Toggle = Tab3:Toggle("Bypass SeekWall",false,function(Value)
 		if Value then
 			for _, child in pairs(workspace.CurrentRooms:GetChildren()) do
 				if child.Parts:FindFirstChild("ScaryWall") then
@@ -729,14 +638,10 @@ local Toggle = Section:AddToggle("BS",{
 		else
 			SeekWall:Disconnect()
 		end
-	end,
-})
+	end
+)
 
-local Toggle = Section:AddToggle("BD",{
-	Text = "Bypass DrakoBloxxers",
-	Default = false,
-	Tooltip = "BypassDrakoBloxxers",
-	Callback = function(Value)
+local Toggle = Tab3:Toggle("Bypass DrakeBloxxers",false,function(Value)
 		if Value then
 			DrakoBloxxers = workspace.ChildAdded:Connect(function(child)
 				task.wait(1)
@@ -753,8 +658,8 @@ local Toggle = Section:AddToggle("BD",{
 			DrakoBloxxers:Disconnect()
 		end
 	end,
-})
-game:GetService("Workspace").DescendantAdded:Connect(function(v186)if  not _G.antibanananana then return;end if v186.IsA(v186,"Part") then if _G.antibanananana then if (v186.Name=="BananaPeel") then v186.CanTouch=false;end end end end);Section:AddToggle("MyToggle",{Text="Bypass Banana",Default=false,Tooltip="Anti BananaPeel!",Callback=function(v187)local v188=0;while true do if (v188==(0 + 0)) then _G.antibanananana=v187;if (_G.antibanananana==true) then for v600,v601 in pairs(game:GetService("Workspace"):GetDescendants()) do if v601:IsA("Part") then if (v601.Name=="BananaPeel") then v601.CanTouch=false;end end end end break;end end end});game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.antije then for v413,v414 in pairs(game.workspace:GetChildren()) do if (v414.Name=="JeffTheKiller") then v414.Knife.CanTouch=false;end end for v415,v416 in pairs(game.workspace:GetChildren()) do if (v416.Name=="JeffTheKiller") then v416.Head.CanTouch=false;end end for v417,v418 in pairs(game.workspace:GetChildren()) do if (v418.Name=="JeffTheKiller") then v418.HumanoidRootPart.CanTouch=false;end end for v419,v420 in pairs(game.workspace:GetChildren()) do if (v420.Name=="JeffTheKiller") then v420["Left Arm"].CanTouch=false;end end for v421,v422 in pairs(game.workspace:GetChildren()) do if (v422.Name=="JeffTheKiller") then v422["Left Leg"].CanTouch=false;end end for v423,v424 in pairs(game.workspace:GetChildren()) do if (v424.Name=="JeffTheKiller") then v424["Right Arm"].CanTouch=false;end end for v425,v426 in pairs(game.workspace:GetChildren()) do if (v426.Name=="JeffTheKiller") then v426["Right Leg"].CanTouch=false;end end for v427,v428 in pairs(game.workspace:GetChildren()) do if (v428.Name=="JeffTheKiller") then v428.Torso.CanTouch=false;end end end end);end);Section:AddToggle("MyToggle",{Text="Bypass Jeff",Default=false,Tooltip="Anti Jeff!",Callback=function(v189)_G.antije=v189;end});
+)
+game:GetService("Workspace").DescendantAdded:Connect(function(v186)if  not _G.antibanananana then return;end if v186.IsA(v186,"Part") then if _G.antibanananana then if (v186.Name=="BananaPeel") then v186.CanTouch=false;end end end end);local v188=0;while true do if (v188==(0 + 0)) then _G.antibanananana=v187;if (_G.antibanananana==true) then for v600,v601 in pairs(game:GetService("Workspace"):GetDescendants()) do if v601:IsA("Part") then if (v601.Name=="BananaPeel") then v601.CanTouch=false;end end end end break;end end end});game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.antije then for v413,v414 in pairs(game.workspace:GetChildren()) do if (v414.Name=="JeffTheKiller") then v414.Knife.CanTouch=false;end end for v415,v416 in pairs(game.workspace:GetChildren()) do if (v416.Name=="JeffTheKiller") then v416.Head.CanTouch=false;end end for v417,v418 in pairs(game.workspace:GetChildren()) do if (v418.Name=="JeffTheKiller") then v418.HumanoidRootPart.CanTouch=false;end end for v419,v420 in pairs(game.workspace:GetChildren()) do if (v420.Name=="JeffTheKiller") then v420["Left Arm"].CanTouch=false;end end for v421,v422 in pairs(game.workspace:GetChildren()) do if (v422.Name=="JeffTheKiller") then v422["Left Leg"].CanTouch=false;end end for v423,v424 in pairs(game.workspace:GetChildren()) do if (v424.Name=="JeffTheKiller") then v424["Right Arm"].CanTouch=false;end end for v425,v426 in pairs(game.workspace:GetChildren()) do if (v426.Name=="JeffTheKiller") then v426["Right Leg"].CanTouch=false;end end for v427,v428 in pairs(game.workspace:GetChildren()) do if (v428.Name=="JeffTheKiller") then v428.Torso.CanTouch=false;end end end end);end);Section:AddToggle("MyToggle",{Text="Bypass Jeff",Default=false,Tooltip="Anti Jeff!",Callback=function(v189)_G.antije=v189;end});
 Section:AddToggle("nsc",{Text="Bypass Trigger",Default=false,Callback=function(v119)v16.noseek=v119;if v119 then local v279;v279=workspace.CurrentRooms.ChildAdded:Connect(function(v333)local v334=0 -0 ;local v335;while true do if (v334==(0 + 0)) then v335=v333:WaitForChild("TriggerEventCollision",2);if v335 then v335:Destroy();end break;end end end);repeat task.wait();until  not v16.noseek v279:Disconnect();end end});
 Section:AddToggle("MyToggle",{Text="Bypass Halt",Default=false,Tooltip="Anti Halt",Callback=function(v122)local v123=0;while true do if (v123==(1480 -(641 + 839))) then _G.BypassHalte=v122;if (_G.BypassHalte==true) then local v472=913 -(910 + 3) ;local v473;while true do if (v472==(0 -0)) then v473=game:GetService("ReplicatedStorage").ClientModules.EntityModules.Shade;v473.Parent=game.Workspace;break;end end elseif (_G.BypassHalte==false) then local v642=1684 -(1466 + 218) ;local v643;while true do if (v642==(0 + 0)) then v643=game.Workspace.Shade;v643.Parent=game:GetService("ReplicatedStorage").ClientModules.EntityModules;break;end end end break;end end end});
 Section:AddToggle("MyToggle",{Text="Bypass Dupe",Default=false,Tooltip="Anti Dupe",Callback=function(v128)v16.nodupe=v128;if v128 then local v288;v288=game:GetService("ReplicatedStorage").GameData.LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()task.wait();for v397,v398 in pairs(game:GetService("Workspace").CurrentRooms:GetDescendants()) do if (v398.Name=="DoorFake") then v398.Hidden.CanTouch=false;end end repeat task.wait();until  not v16.nodupe v288:Disconnect();end);end end});
