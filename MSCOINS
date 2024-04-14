@@ -126,4 +126,29 @@ local Toggle = Tab2:Toggle("Door ESP",function(Value) if Value then for _, v in 
 
 local Toggle = Tab2:Toggle("Closet ESP",function(Value) if Value then for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do if v.Name == "Wardrobe" and v:IsA("Model") then selection(v, "Closet", false, true) end end ClosetESP = workspace.CurrentRooms.ChildAdded:Connect(function(child) task.wait(1) for _, v in pairs(child:GetDescendants()) do if v.Name == "Wardrobe" and v:IsA("Model") then selection(v, "Closet", false, true) end end end) else ClosetESP:Disconnect() for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do if v.Name == "KiwiHighlight_3" then v:Destroy() end end end end )
 
-local Toggle = Tab2:Toggle("Entities ESP",function(Value) EntityEsp = Value end )
+local Toggle = Tab2:Toggle("Other Entities ESP",function(Value) EntityEsp = Value end )
+
+local Toggle = Tab2:Toggle("Figure ESP",function(Value)
+		if Value then
+			for _, v in pairs(workspace.CurrentRooms:GetDescendants(50)) do
+				if v.Name == "FigureRagdoll" or "FigureLibrary" and v:IsA("Model") then
+					selection(v, "Figure", False, true)
+				end
+			end
+			ClosetESP = workspace.CurrentRooms.ChildAdded:Connect(function(child)
+				task.wait(1)
+				for _, v in pairs(child:GetDescendants()) do
+					if v.Name == "FigureRadoll" or "FigureLibrary" and v:IsA("Model") then
+						selection(v, "Figure", false, true)
+					end
+				end
+			end)
+		else
+			ClosetESP:Disconnect()
+			for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
+				if v.Name == "KiwiHighlight_3" then
+					v:Destroy()
+				end
+			end
+		end
+	end)
