@@ -139,7 +139,6 @@ local function notify(entity, bypassed, other)
 			tem.UIStroke.UIGradient.Rotation += 1
 		end
 	end)
-
 	spawn(function()
 		while true do
 			task.wait(0.01)
@@ -258,8 +257,8 @@ end
 -->> Loader
 repeat wait() until game:IsLoaded()
 -->> Library Variables
-local Library2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
-local Window = Library2:Window("MSCOINS", "v1.2.6", "A")
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
+local Window = Library:Window("MSCOINS", "v1.2.6", "M")
 local Tab = Window:Tab("Main")
 local Tab2 = Window:Tab("ESP")
 local Tab3 = Window:Tab("Bypass")
@@ -360,7 +359,7 @@ local Toggle = Tab:Toggle("Entity Notifier",false,function(Value)
 )
 local Toggle = Tab:Toggle("Auto Pick",false,function(Value)
 		AutoInteract = Value
-	end,
+	end
 )
 local Toggle = Tab:Toggle("Noclip",false,function(Value)
 		if Value then
@@ -520,7 +519,7 @@ local Collison = game.Players.LocalPlayer.Character:FindFirstChild("Collision")
 Collison.Position = Collison.Position - Vector3.new(0,-7.5,0)
    end
 end)
-local Button = Tan:Button("Delete Messages",function()
+local Button = Tab:Button("Delete Messages",function()
 		for _, v in pairs(workspace:GetChildren()) do
 			if v:IsA("Message") then
 				v:Destroy()
@@ -615,7 +614,7 @@ local Toggle = Tab3:Toggle("Bypass Eyes",false,function(Value)
 		else
 			Eyes:Disconnect()
 		end
-	end,
+	end
 )
 local Toggle = Tab3:Toggle("Bypass SeekWall",false,function(Value)
 		if Value then
@@ -652,7 +651,7 @@ local Toggle = Tab3:Toggle("Bypass DrakeBloxxers",false,function(Value)
 		else
 			DrakoBloxxers:Disconnect()
 		end
-	end,
+	end
 )
 game:GetService("Workspace").DescendantAdded:Connect(function(v186)if  not _G.antibanananana then return;end if v186.IsA(v186,"Part") then if _G.antibanananana then if (v186.Name=="BananaPeel") then v186.CanTouch=false;end end end end);local Toggle = Tab3:Toggle("Bypass Banana",false,function(v187)local v188=0;while true do if (v188==(0 + 0)) then _G.antibanananana=v187;if (_G.antibanananana==true) then for v600,v601 in pairs(game:GetService("Workspace"):GetDescendants()) do if v601:IsA("Part") then if (v601.Name=="BananaPeel") then v601.CanTouch=false;end end end end break;end end end);game:GetService("RunService").RenderStepped:Connect(function()pcall(function()if _G.antije then for v413,v414 in pairs(game.workspace:GetChildren()) do if (v414.Name=="JeffTheKiller") then v414.Knife.CanTouch=false;end end for v415,v416 in pairs(game.workspace:GetChildren()) do if (v416.Name=="JeffTheKiller") then v416.Head.CanTouch=false;end end for v417,v418 in pairs(game.workspace:GetChildren()) do if (v418.Name=="JeffTheKiller") then v418.HumanoidRootPart.CanTouch=false;end end for v419,v420 in pairs(game.workspace:GetChildren()) do if (v420.Name=="JeffTheKiller") then v420["Left Arm"].CanTouch=false;end end for v421,v422 in pairs(game.workspace:GetChildren()) do if (v422.Name=="JeffTheKiller") then v422["Left Leg"].CanTouch=false;end end for v423,v424 in pairs(game.workspace:GetChildren()) do if (v424.Name=="JeffTheKiller") then v424["Right Arm"].CanTouch=false;end end for v425,v426 in pairs(game.workspace:GetChildren()) do if (v426.Name=="JeffTheKiller") then v426["Right Leg"].CanTouch=false;end end for v427,v428 in pairs(game.workspace:GetChildren()) do if (v428.Name=="JeffTheKiller") then v428.Torso.CanTouch=false;end end end end);end);local Toggle = Tab3:Toggle("Bypass Jeff",false,function(v189)_G.antije=v189;end);
 local Toggle = Tab3:Toggle("Bypass Seek Trigger",false,function(v119)v16.noseek=v119;if v119 then local v279;v279=workspace.CurrentRooms.ChildAdded:Connect(function(v333)local v334=0 -0 ;local v335;while true do if (v334==(0 + 0)) then v335=v333:WaitForChild("TriggerEventCollision",2);if v335 then v335:Destroy();end break;end end end);repeat task.wait();until  not v16.noseek v279:Disconnect();end end);
@@ -767,8 +766,8 @@ local Toggle = Tab2:Toggle("Closet ESP",false,function(Value)
 				end
 			end
 		end
-	end,
-})
+	end
+)
 
 local Toggle = Tab2:Toggle("Entities ESP",false,function(Value)
 		EntityEsp = Value
