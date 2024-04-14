@@ -162,7 +162,7 @@ local function notify(entity, bypassed, other)
 	end)
 end
 if _G.Only then
-Library:Notify("Only The 1 Script")
+setfpscap(450)
 return
 end
 _G.Only = true
@@ -255,16 +255,11 @@ function checkDistance(part, extra)
 	end
 	return false
 end
-local repo = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/main/'
-
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 -->> Loader
 repeat wait() until game:IsLoaded()
 -->> Library Variables
 local Library2 = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
-local Window = Library2:Window("MSCOIND", "v1.2.6", "A")
+local Window = Library2:Window("MSCOINS", "v1.2.6", "A")
 local Tab = Window:Tab("Main")
 local Tab2 = Window:Tab("ESP")
 local Tab3 = Window:Tab("Bypass")
