@@ -199,7 +199,7 @@ local function billboard(child, name, name2, name3)
 	text_label.Parent = billboard_gui
 
 	local uistroke = Instance.new("UIStroke")
-	uistroke.Thickness = 0.5
+	uistroke.Thickness = 0
 	uistroke.Parent = text_label
 
 	spawn(function()
@@ -257,6 +257,7 @@ end
 -->> Loader
 repeat wait() until game:IsLoaded()
 -->> Library Variables
+
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/vep1032/VepStuff/main/VL"))()
 local Window = Library:Window("MSCOINS", "v1.2.6", "M")
 local Tab = Window:Tab("Main")
@@ -291,25 +292,25 @@ local Toggle = Tab:Toggle("Entity Notifier",false,function(Value)
 				if child.Name == "Eyes" then
 					notify("Eyes")
 					if EntityEsp then
-						selection(child, "[Eyes]")
+						selection(child, "Eyes")
 							end
-                                      elseif child.Name == "LiveHintBook" then
-					if EntityEsp then
-						selection(child, "[Book]")
+elseif child.Name == "FigureLibrary" then
+if EntityEsp then
+						selection(child, "Figure")
 					end
-                                      elseif child.Name == "LiveBreakerPolePickup" then
-					if EntityEsp then
-						selection(child, "[Breaker]")
+elseif child.Name == "FigureRagdoll" then
+if EntityEsp then
+						selection(child, "Figure")
 					end
                                 elseif child.Name == "SeekMoving" then
 					notify("Seek")
 					if EntityEsp then
-						selection(child, "[Seek]")
+						selection(child, "Seek")
 					end
                                 elseif child.Name == "JeffTheKiller" then
 					notify("Jeff")
 					if EntityEsp then
-						selection(child, " ")
+						selection(child, "Jeff")
 					end
 				elseif child.Name == "RushMoving" and checkDistance(child:FindFirstChildWhichIsA("BasePart"), 1000) then
 					notify("Rush")
@@ -383,8 +384,7 @@ local Toggle = Tab:Toggle("Noclip",false,function(Value)
 		end
 	end
 )
-local Toggle = Tab:Toggle("FullBright",false,
-	Callback = function(Value)
+local Toggle = Tab:Toggle("FullBright",false,function(Value)
 		if Value then
 				game:GetService("Lighting").Brightness = 2
 				game:GetService("Lighting").ClockTime = 14
