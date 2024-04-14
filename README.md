@@ -707,7 +707,8 @@ local Toggle = Tab2:Toggle("Key ESP",function(Value)
  )
 
 local Toggle = Tab2:Toggle("Door ESP",function(Value)
-	(workspace.CurrentRooms:GetDescendants()) do
+if Value then
+for _, v in pairs(workspace.CurrentRooms:GetDescendants()) do
 				if v.Name == "Door" and v:IsA("Model") then
 					selection(v, "Door", true)
 					spawn(function()
